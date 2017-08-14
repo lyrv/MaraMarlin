@@ -82,4 +82,27 @@ class model_Cotizacion extends manejador{
        $resultadoDatos['partidas']=$partidas['datos'];
        return $resultadoDatos;
     }
+    public function buscarCotizaciones() {
+       $cotizacion= $this->buscarEsto($data,$this->vista);
+       $partidas= $this->buscarEstoArray($data,"vw_productos");
+       $resultadoDatos['cotizacion']=$cotizacion['datos'];
+       $subtotal=0;
+       foreach ($partidas['datos'] as $key => $value) {
+           unset($partidas['datos'][$key]['cotizacionID']);
+           unset($partidas['datos'][$key]['codigoID']);
+           unset($partidas['datos'][$key]['partidaID']);
+           unset($partidas['datos'][$key]['iva']);
+           unset($partidas['datos'][$key]['existencias']);
+           $subtotal = $subtotal+$partidas['datos'][$key]['importe'];
+           $partidas['datos'][$key]['preciolista'] = "$".number_format($partidas['datos'][$key]['preciolista'], 2, ".", ',');
+           $partidas['datos'][$key]['preciodescuento'] = "$".number_format($partidas['datos'][$key]['preciodescuento'], 2, ".", ',');
+           $partidas['datos'][$key]['importe'] = "$".number_format($partidas['datos'][$key]['importe'], 2, ".", ',');
+       }
+       $totales['subtotal'] = "$".number_format($subtotal, 2, ".", ',');
+       $totales['iva'] = "$".number_format(($subtotal*.16), 2, ".", ',');
+       $totales['total'] = "$".number_format(($subtotal*1.16), 2, ".", ',');
+       $resultadoDatos['totales']=$totales;
+       $resultadoDatos['partidas']=$partidas['datos'];
+       return $cotizacion;
+    }
 }

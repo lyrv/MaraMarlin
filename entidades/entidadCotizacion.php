@@ -135,4 +135,7 @@ class entidadCotizacion {
     public function cargarCotizacion($id) {
         return $this->modelo->buscarCotizacion($id);
     }
+    public function cargarCotizaciones() {
+        return $this->modelo->buscarCotizaciones();
+    }
 }

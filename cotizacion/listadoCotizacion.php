@@ -1,3 +1,20 @@
+<script>
+    $( document ).ready(function() {
+        cargar();
+        function cargar(){
+            $.ajax({
+                method: "POST",
+                url: "<?= baseURL ?>/controller/controllerCotizacion.php",
+                data: { accion: "cargarCotizaciones"}
+            })
+            .done(function( msg ) {
+                alert( "Data Saved: " + msg );
+            });            
+        }
+    });
+</script>
+<?php
+?>
 <div class="container-fluid">
     <div class="content">
         <div class="panel panel-primary">

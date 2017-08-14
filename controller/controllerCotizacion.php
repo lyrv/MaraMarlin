@@ -78,3 +78,7 @@ function cargarCotizacion($datos,$objeto){
     $repuesta = $objeto->cargarCotizacion($datos['datos']['cotizacionID']);
     print json_encode($repuesta);
 }
+function cargarCotizaciones($datos,$objeto){
+    $repuesta = $objeto->cargarCotizaciones();
+    print json_encode($repuesta);
+}
